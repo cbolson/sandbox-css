@@ -1,0 +1,23 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 2vw 12vw;
+  margin: 0;
+}
+.grid {
+  border: 10x solid red;
+  display: grid;
+}
