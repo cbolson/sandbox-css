@@ -1,0 +1,181 @@
+@use "sass:math";
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-size: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+.card-container {
+  --rad-l: 120px;
+  --rad-s: 60px;
+  --offset: calc(var(--rad-l) * 2);
+  --angle: 0;
+  --border-clr: #fff;
+  --border-rad: 50%;
+
+  width: calc(var(--rad-l) * 5);
+  aspect-ratio: 1;
+  border-radius: var(--border-rad);
+  display: grid;
+  place-items: center;
+  position: relative;
+  cursor: pointer;
+
+  & * {
+    aspect-ratio: 1;
+    border-radius: inherit;
+    display: grid;
+    place-items: center;
+  }
+
+  &:hover .card-mask {
+    background-color: transparent;
+
+    width: calc(var(--offset) * 2);
+    font-size: 0;
+    .hamburger {
+      opacity: 0;
+    }
+  }
+  &:hover .card-link {
+    transform: translate(
+      calc(cos(var(--angle)) * var(--offset)),
+      calc(sin(var(--angle)) * var(--offset))
+    );
+    opacity: 1;
+    background-color: var(--body-bg);
+  }
+  &:hover .card-link a {
+    scale: 1;
+  }
+}
+.card-mask {
+  width: calc(var(--rad-l));
+  font-size: 6rem;
+  border: 1px solid var(--border-clr);
+  transition: width 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.card {
+  width: calc(var(--rad-s) * 2);
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    transition: scale 300ms ease-in, opacity 150ms ease-in;
+    border: 3px solid var(--border-clr);
+  }
+  &:hover .card-contents {
+    opacity: 1;
+  }
+  &:hover .card-contents img {
+    scale: 1;
+  }
+  &:hover::before {
+    animation: reveal-bar 150ms 300ms ease-out forwards;
+  }
+  &::before {
+    content: "";
+    background-color: var(--border-clr);
+    width: 3px;
+    height: 0;
+    border-radius: 5px;
+    z-index: -1;
+    transform: rotate(var(--rotate)) translate(0, calc(var(--rad-s) * 2));
+  }
+}
+.card-contents {
+  position: absolute;
+  width: calc(var(--rad-l) * 2);
+  height: calc(var(--rad-l) * 2);
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+  z-index: 3;
+  & img {
+    scale: 0;
+  }
+}
+.card-link {
+  width: calc(var(--rad-s) * 2);
+  background-color: transparent;
+  border: 3px solid var(--border-clr);
+  position: absolute;
+  font-size: 1.4rem;
+  z-index: -1;
+  transition: transform 1500ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    opacity 300ms;
+  & a {
+    transition: 300ms ease-out 300ms;
+    scale: 0;
+  }
+}
+
+$total: 8;
+$colors: red, orange, blue, yellow, green, purple, teal, pink;
+@function getColor($colors, $pos) {
+  @return nth($colors, $pos);
+}
+@function toDegrees($val) {
+  @return math.div($val, total);
+}
+@for $i from 1 through ($total) {
+  $deg: calc($i * 360deg / $total);
+  $rotate: $deg - 90;
+  $clr: getColor($colors, $i);
+  .card:nth-of-type(#{$i}) {
+    --angle: #{$deg};
+    --rotate: #{$rotate};
+    --border-clr: #{$clr};
+  }
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  height: 6px;
+  width: 40px;
+  border-radius: 3px;
+  transition: opacity 300ms;
+}
+.hamburger::before {
+  content: "";
+  margin-top: -12px;
+}
+
+.hamburger::after {
+  content: "";
+  margin-top: 12px;
+}
+@keyframes reveal-bar {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--rad-l);
+  }
+}
