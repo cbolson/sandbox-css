@@ -2,7 +2,7 @@
 
 ## Description
 
-Use clip path to create a shape, the torick being how to add the borders.
+Use clip path to create a shape, the trick being how to add the borders.
 
 ## About
 
