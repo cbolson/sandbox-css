@@ -1,0 +1,89 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.box {
+  /********************************/
+
+  /* test by chaning these values */
+  --border-width: 10px;
+  --dist-outer: 30px;
+
+  /********************************/
+
+  --w-outer: 50vw;
+  --h-outer: 30vw;
+  --bg-color: #fff;
+  --border-color: linear-gradient(45deg, red, blue);
+  --border-radius-outer: 20px;
+  --border-radius-inner: 12px; /* adjust to fit main border radius - there is probably a "proper" way to calcualte this */
+
+  /* calculate inner width & height */
+  --w-inner: calc(var(--w-outer) - var(--border-width));
+  --h-inner: calc(var(--h-outer) - var(--border-width));
+  /* calculate inner box corner cuts */
+  --dist-inner-top: calc(var(--dist-outer) - calc(var(--border-width) / 2));
+  --dist-inner-bottom: calc(var(--dist-inner-top) + var(--border-width));
+
+  width: var(--w-outer);
+  height: var(--h-outer);
+  border-radius: var(--border-radius-outer);
+  background: var(--border-color);
+
+  /* cut off top left and bottom right cobers */
+  clip-path: polygon(
+    var(--dist-outer) 0,
+    100% 0,
+    100% calc(var(--h-outer) - var(--dist-outer)),
+    calc(var(--w-outer) - var(--dist-outer)) 100%,
+    0 100%,
+    0 var(--dist-outer)
+  );
+
+  /* positioning the box in the viewport */
+  margin: 5vh auto;
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: 1rem;
+}
+.box span {
+  color: #000;
+  z-index: 2;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  text-align: center;
+}
+/* add inner box - smaller than outer by using the --border-width*/
+.box::after {
+  content: "";
+  position: absolute;
+  border-radius: var(--border-radius-inner);
+  inset: var(--border-width);
+  background: var(--bg-color);
+  width: --w-inner;
+  height: --h-inner;
+  clip-path: polygon(
+    var(--dist-inner-top) 0,
+    100% 0,
+    100% calc(var(--h-inner) - var(--dist-inner-bottom)),
+    calc(var(--w-inner) - var(--dist-inner-bottom)) 100%,
+    0 100%,
+    0 var(--dist-inner-top)
+  );
+}
