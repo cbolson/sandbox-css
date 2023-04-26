@@ -1,4 +1,4 @@
-# Cutton Corners (with borders)
+# Cutting Corners (with borders)
 
 ## Description
 
@@ -13,3 +13,4 @@ Use clip path to create a shape, the torick being how to add the borders.
 ## Sources
 
 - Inspired by a [Kevin Powell video](https://www.youtube.com/watch?v=aW6qEAQSctY)
+- [Demo](https://codepen.io/cbolson/pen/wvYdQaQ?editors=1100)
