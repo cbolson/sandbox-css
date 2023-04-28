@@ -21,8 +21,8 @@ body {
 .box {
   /********************************/
 
-  /* test by chaning these values */
-  --border-width: 10px;
+  /* test by changing these values */
+  --border-width: 20px;
   --dist-outer: 30px;
 
   /********************************/
