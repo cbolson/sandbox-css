@@ -14,11 +14,11 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
   align-items: center;
-  width: 80vw;
+  width: 60vw;
 }
 .card {
   flex: 1;
-min-width:220px;
+  min-width: 220px;
   height: 100px;
   /*border: 1px solid #DDD;*/
   border-radius: 8px;
@@ -62,10 +62,11 @@ min-width:220px;
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  padding: 0.75rem 1rem;
+  padding: 0 1rem 1rem;
 }
-.card__base p{
-  font-size:0.9rem;
+.card__base p {
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem;
 }
 .card:hover {
   height: 300px;
