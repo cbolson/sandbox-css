@@ -6,16 +6,19 @@ body {
   place-items: center;
   height: 100vh;
   background: linear-gradient(45deg, blue, pink);
+  font-family: "verdana", san-serif;
+  font-size: 1rem;
 }
 .cards-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   align-items: center;
   width: 80vw;
 }
 .card {
   flex: 1;
-
+min-width:220px;
   height: 100px;
   /*border: 1px solid #DDD;*/
   border-radius: 8px;
@@ -60,6 +63,9 @@ body {
   justify-content: space-between;
   text-align: left;
   padding: 0.75rem 1rem;
+}
+.card__base p{
+  font-size:0.9rem;
 }
 .card:hover {
   height: 300px;
