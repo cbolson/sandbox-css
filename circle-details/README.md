@@ -13,5 +13,6 @@ CSS only animated nav (desktop only as it requires :hover)
 
 ## Sources & inspiration
 
-- Using math to locate elements around a circle [Kevin Powel](https://www.youtube.com/watch?v=eO33Rh3GFGk)
+- Using math to locate elements around a circle [Kevin Powell](https://www.youtube.com/watch?v=eO33Rh3GFGk)
+- Text in circle [CSS-tricks](https://css-tricks.com/using-css-to-set-text-inside-a-circle/)
 - Images [Unspash](https://unsplash.com)
