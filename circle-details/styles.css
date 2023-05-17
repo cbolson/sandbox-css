@@ -1,0 +1,230 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-size: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.card-container {
+  --rad-l: 120px;
+  --rad-s: 60px;
+  --offset: calc(var(--rad-l) * 2);
+  --angle: 0;
+  --border-clr: #fff;
+  --border-rad: 50%;
+  width: calc(var(--rad-l) * 5);
+  aspect-ratio: 1;
+  border-radius: var(--border-rad);
+  display: grid;
+  place-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.card-container:hover .card-mask {
+  background-color: transparent;
+  width: calc(var(--offset) * 2);
+  font-size: 0;
+}
+.card-container:hover .card-mask .hamburger {
+  opacity: 0;
+}
+.card-container:hover .card-link {
+  transform: translate(calc(cos(var(--angle)) * var(--offset)), calc(sin(var(--angle)) * var(--offset)));
+  opacity: 1;
+  background-color: var(--body-bg);
+}
+
+.card-mask {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: calc(var(--rad-l));
+  font-size: 6rem;
+  transition: width 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  display: grid;
+  place-items: center;
+}
+
+.card {
+  width: calc(var(--rad-s) * 2);
+  height: calc(var(--rad-s) * 2);
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  margin: auto;
+  cursor: pointer;
+}
+.card:hover .card-contents {
+  opacity: 1;
+  scale: 1;
+}
+
+.card-contents {
+  position: absolute;
+  top: calc(-0.75 * var(--rad-l));
+  left: calc(-0.75 * var(--rad-l));
+  width: calc(var(--rad-l) * 2.5);
+  height: calc(var(--rad-l) * 2.5);
+  opacity: 0;
+  background: var(--body-bg);
+  transition: opacity 300ms ease-out, scale 500ms ease-out;
+  z-index: 3;
+  border-radius: 50%;
+  border: 3px solid var(--border-clr);
+  scale: 0;
+}
+.card-contents::before {
+  content: "";
+  float: left;
+  height: 100%;
+  width: 50%;
+  shape-outside: polygon(0 0, 98% 0, 50% 6%, 23.4% 17.3%, 6% 32.6%, 0 50%, 6% 65.6%, 23.4% 82.7%, 50% 94%, 98% 100%, 0 100%);
+  shape-margin: 7%;
+}
+.card-contents .card-inner {
+  height: 100%;
+}
+.card-contents .card-inner::before {
+  content: "";
+  float: right;
+  height: 100%;
+  width: 50%;
+  shape-outside: polygon(2% 0%, 100% 0%, 100% 100%, 2% 100%, 50% 94%, 76.6% 82.7%, 94% 65.6%, 100% 50%, 94% 32.6%, 76.6% 17.3%, 50% 6%);
+  shape-margin: 7%;
+}
+.card-contents h2 {
+  margin: 0 0 1rem;
+  padding: 0;
+}
+.card-contents p {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.card-link {
+  width: calc(var(--rad-s) * 2);
+  height: calc(var(--rad-s) * 2);
+  background-color: transparent;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: -1;
+  opacity: 0;
+  transition: transform 1500ms cubic-bezier(0.075, 0.82, 0.165, 1), opacity 300ms;
+}
+.card-link img {
+  border: 3px solid var(--border-clr);
+  border-radius: 50%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: scale 300ms ease-in, opacity 150ms ease-in;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+.card-link:hover img {
+  scale: 1.1;
+}
+
+.card:nth-of-type(1) {
+  --angle: 45deg;
+  --rotate: -45deg;
+  --border-clr: red;
+}
+
+.card:nth-of-type(2) {
+  --angle: 90deg;
+  --rotate: 0deg;
+  --border-clr: orange;
+}
+
+.card:nth-of-type(3) {
+  --angle: 135deg;
+  --rotate: 45deg;
+  --border-clr: blue;
+}
+
+.card:nth-of-type(4) {
+  --angle: 180deg;
+  --rotate: 90deg;
+  --border-clr: yellow;
+}
+
+.card:nth-of-type(5) {
+  --angle: 225deg;
+  --rotate: 135deg;
+  --border-clr: green;
+}
+
+.card:nth-of-type(6) {
+  --angle: 270deg;
+  --rotate: 180deg;
+  --border-clr: purple;
+}
+
+.card:nth-of-type(7) {
+  --angle: 315deg;
+  --rotate: 225deg;
+  --border-clr: teal;
+}
+
+.card:nth-of-type(8) {
+  --angle: 360deg;
+  --rotate: 270deg;
+  --border-clr: pink;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  height: 6px;
+  width: 40px;
+  border-radius: 3px;
+  transition: opacity 300ms;
+}
+
+.hamburger::before {
+  content: "";
+  margin-top: -12px;
+}
+
+.hamburger::after {
+  content: "";
+  margin-top: 12px;
+}
+
+@keyframes reveal-bar {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--rad-l);
+  }
+}/*# sourceMappingURL=styles.css.map */
