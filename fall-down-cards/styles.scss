@@ -52,7 +52,7 @@ $numCards: 3;
 $stepScale: 0.1;
 $stepOpacity: 0.3;
 $stepOffset: 50;
-$stepDelay: 2000;
+$stepDelay: 3000;
 $stepDelayMove: 1000;
 @for $i from 1 through $numCards {
   $val: ($i - 1);
@@ -80,17 +80,25 @@ $stepDelayMove: 1000;
    third card needs to move forward 50% as first card drops down, then further 50% after previous
    LAST card does not need to drop down
    */
-    @if ($i < $numCards) {
+    @if ($i==3) {
+      // last one - needs to move forward twice....
+      animation-name: moveForwardsHalf-#{$i}, moveForwards-#{$i};
+      animation-delay: #{$stepDelay}ms, var(--_delayMove);
+    } @else {
       animation-name: moveForwards-#{$i}, dropDown-#{$i};
       animation-delay: var(--_delayMove), var(--_delayDrop);
-    } @else {
-      animation-name: moveForwards-#{$i};
-      animation-delay: var(--_delayMove);
     }
 
     animation-duration: 300ms;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
+  }
+  @keyframes moveForwardsHalf-#{$i} {
+    to {
+      scale: 0.9;
+      translate: 0 -50px;
+      opacity: 0.75;
+    }
   }
   @keyframes moveForwards-#{$i} {
     to {

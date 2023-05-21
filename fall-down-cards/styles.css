@@ -52,7 +52,7 @@ body {
   --_scale: 1;
   --_opacity: 1;
   --_offsetY: 0px;
-  --_delayDrop: 2000ms;
+  --_delayDrop: 3000ms;
   --_delayMove: 0ms;
   z-index: 1;
   /*
@@ -68,6 +68,13 @@ body {
   animation-timing-function: ease-in;
 }
 
+@keyframes moveForwardsHalf-1 {
+  to {
+    scale: 0.9;
+    translate: 0 -50px;
+    opacity: 0.75;
+  }
+}
 @keyframes moveForwards-1 {
   to {
     scale: 1;
@@ -87,8 +94,8 @@ body {
   --_scale: 0.9;
   --_opacity: 0.7;
   --_offsetY: -50px;
-  --_delayDrop: 4000ms;
-  --_delayMove: 2000ms;
+  --_delayDrop: 6000ms;
+  --_delayMove: 3000ms;
   z-index: 0;
   /*
   first card only needs to drop down
@@ -103,6 +110,13 @@ body {
   animation-timing-function: ease-in;
 }
 
+@keyframes moveForwardsHalf-2 {
+  to {
+    scale: 0.9;
+    translate: 0 -50px;
+    opacity: 0.75;
+  }
+}
 @keyframes moveForwards-2 {
   to {
     scale: 1;
@@ -122,8 +136,8 @@ body {
   --_scale: 0.8;
   --_opacity: 0.4;
   --_offsetY: -100px;
-  --_delayDrop: 6000ms;
-  --_delayMove: 4000ms;
+  --_delayDrop: 9000ms;
+  --_delayMove: 6000ms;
   z-index: -1;
   /*
   first card only needs to drop down
@@ -131,13 +145,20 @@ body {
   third card needs to move forward 50% as first card drops down, then further 50% after previous
   LAST card does not need to drop down
   */
-  animation-name: moveForwards-3;
-  animation-delay: var(--_delayMove);
+  animation-name: moveForwardsHalf-3, moveForwards-3;
+  animation-delay: 3000ms, var(--_delayMove);
   animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in;
 }
 
+@keyframes moveForwardsHalf-3 {
+  to {
+    scale: 0.9;
+    translate: 0 -50px;
+    opacity: 0.75;
+  }
+}
 @keyframes moveForwards-3 {
   to {
     scale: 1;
