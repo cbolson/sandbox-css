@@ -62,8 +62,8 @@ body {
   LAST card does not need to drop down
   */
   animation-name: moveForwards-1, dropDown-1;
-  animation-duration: 300ms;
   animation-delay: var(--_delayMove), var(--_delayDrop);
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in;
 }
@@ -97,8 +97,8 @@ body {
   LAST card does not need to drop down
   */
   animation-name: moveForwards-2, dropDown-2;
-  animation-duration: 300ms;
   animation-delay: var(--_delayMove), var(--_delayDrop);
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in;
 }
@@ -131,9 +131,9 @@ body {
   third card needs to move forward 50% as first card drops down, then further 50% after previous
   LAST card does not need to drop down
   */
-  animation-name: moveForwards-3, dropDown-3;
+  animation-name: moveForwards-3;
+  animation-delay: var(--_delayMove);
   animation-duration: 300ms;
-  animation-delay: var(--_delayMove), var(--_delayDrop);
   animation-fill-mode: forwards;
   animation-timing-function: ease-in;
 }

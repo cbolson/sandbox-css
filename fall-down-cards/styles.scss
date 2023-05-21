@@ -48,13 +48,13 @@ body {
   transition: opacity var(--speed) ease-in, transform var(--speed) ease-in,
     translate var(--speed) ease-in, scale var(--speed) ease-in;
 }
-$cards: 3;
+$numCards: 3;
 $stepScale: 0.1;
 $stepOpacity: 0.3;
 $stepOffset: 50;
 $stepDelay: 2000;
 $stepDelayMove: 1000;
-@for $i from 1 through $cards {
+@for $i from 1 through $numCards {
   $val: ($i - 1);
   $scale: (1 - $val * $stepScale);
   $opacity: (1 - $val * $stepOpacity);
@@ -80,13 +80,17 @@ $stepDelayMove: 1000;
    third card needs to move forward 50% as first card drops down, then further 50% after previous
    LAST card does not need to drop down
    */
-    // @if ($i != $cards) {
-    animation-name: moveForwards-#{$i}, dropDown-#{$i};
+    @if ($i < $numCards) {
+      animation-name: moveForwards-#{$i}, dropDown-#{$i};
+      animation-delay: var(--_delayMove), var(--_delayDrop);
+    } @else {
+      animation-name: moveForwards-#{$i};
+      animation-delay: var(--_delayMove);
+    }
+
     animation-duration: 300ms;
-    animation-delay: var(--_delayMove), var(--_delayDrop);
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
-    // }
   }
   @keyframes moveForwards-#{$i} {
     to {
