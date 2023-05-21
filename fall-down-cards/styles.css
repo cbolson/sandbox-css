@@ -1,0 +1,137 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.cards {
+  width: 600px;
+  perspective: 200px;
+  position: relative;
+  display: grid;
+}
+
+.card {
+  --speed: 500ms;
+  --_scale: 1;
+  --_opacity: 1;
+  --_offsetY: 0;
+  --_delay: 2000ms;
+  background: linear-gradient(45deg, purple, pink);
+  width: 100%;
+  aspect-ratio: 10/4;
+  padding: 2rem 4rem;
+  border-radius: 20px;
+  grid-area: 1/1;
+  /* inital position */
+  scale: var(--_scale);
+  opacity: var(--_opacity);
+  translate: 0 var(--_offsetY);
+  transition: opacity var(--speed) ease-in, transform var(--speed) ease-in, translate var(--speed) ease-in, scale var(--speed) ease-in;
+}
+
+.card:nth-child(1) {
+  --_scale: calc(1 - calc(0 * 0.1));
+  --_opacity: calc(1 - 0 * 0.3);
+  --_offsetY: calc(-1 * calc(calc(0 + 0) * 50px));
+  z-index: calc(1 - 0);
+  --_delayDrop: calc(1 * 2000ms);
+  --_delayMove: calc(0 * 2000ms);
+  animation-name: moveForwards-1, dropDown-1;
+  animation-duration: 300ms;
+  animation-delay: var(--_delayMove), var(--_delayDrop);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+@keyframes moveForwards-1 {
+  to {
+    scale: 1;
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes dropDown-1 {
+  to {
+    scale: 1.2;
+    transform: rotate3d(-1, 0, 0, 13deg);
+    translate: 0 150px;
+    opacity: 0;
+  }
+}
+.card:nth-child(2) {
+  --_scale: calc(1 - calc(1 * 0.1));
+  --_opacity: calc(1 - 1 * 0.3);
+  --_offsetY: calc(-1 * calc(calc(0 + 1) * 50px));
+  z-index: calc(1 - 1);
+  --_delayDrop: calc(2 * 2000ms);
+  --_delayMove: calc(1 * 2000ms);
+  animation-name: moveForwards-2, dropDown-2;
+  animation-duration: 300ms;
+  animation-delay: var(--_delayMove), var(--_delayDrop);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+@keyframes moveForwards-2 {
+  to {
+    scale: 1;
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes dropDown-2 {
+  to {
+    scale: 1.2;
+    transform: rotate3d(-1, 0, 0, 13deg);
+    translate: 0 150px;
+    opacity: 0;
+  }
+}
+.card:nth-child(3) {
+  --_scale: calc(1 - calc(2 * 0.1));
+  --_opacity: calc(1 - 2 * 0.3);
+  --_offsetY: calc(-1 * calc(calc(0 + 2) * 50px));
+  z-index: calc(1 - 2);
+  --_delayDrop: calc(3 * 2000ms);
+  --_delayMove: calc(2 * 2000ms);
+  animation-name: moveForwards-3, dropDown-3;
+  animation-duration: 300ms;
+  animation-delay: var(--_delayMove), var(--_delayDrop);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+@keyframes moveForwards-3 {
+  to {
+    scale: 1;
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+@keyframes dropDown-3 {
+  to {
+    scale: 1.2;
+    transform: rotate3d(-1, 0, 0, 13deg);
+    translate: 0 150px;
+    opacity: 0;
+  }
+}/*# sourceMappingURL=styles.css.map */

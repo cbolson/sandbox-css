@@ -1,0 +1,105 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+.cards {
+  width: 600px;
+  perspective: 200px;
+  position: relative;
+
+  display: grid;
+}
+.card {
+  --speed: 500ms;
+  --_scale: 1;
+  --_opacity: 1;
+  --_offsetY: 0;
+  --_delay: 2000ms;
+
+  background: linear-gradient(45deg, purple, pink);
+  width: 100%;
+  aspect-ratio: 10 / 4;
+  padding: 2rem 4rem;
+  border-radius: 20px;
+  grid-area: 1 / 1;
+
+  /* inital position */
+  scale: var(--_scale);
+  opacity: var(--_opacity);
+  translate: 0 var(--_offsetY);
+
+  transition: opacity var(--speed) ease-in, transform var(--speed) ease-in,
+    translate var(--speed) ease-in, scale var(--speed) ease-in;
+}
+$cards: 3;
+$stepScale: 0.1;
+$stepOpacity: 0.3;
+$stepOffset: 50;
+$stepDelay: 2000;
+$stepDelayMove: 1000;
+@for $i from 1 through $cards {
+  .card:nth-child(#{$i}) {
+    $val: ($i - 1);
+
+    --_scale: calc(1 - calc(#{$val} * #{$stepScale}));
+    --_opacity: calc(1 - #{$val} * #{$stepOpacity});
+    --_offsetY: calc(-1 * calc(calc(0 + #{$val}) * #{$stepOffset}px));
+    z-index: calc(1 - #{$val});
+    --_delayDrop: calc(#{$i} * #{$stepDelay}ms);
+
+    --_delayMove: calc(#{$val} * #{$stepDelay}ms);
+
+    // @if ($i != $cards) {
+    animation-name: moveForwards-#{$i}, dropDown-#{$i};
+    animation-duration: 300ms;
+    animation-delay: var(--_delayMove), var(--_delayDrop);
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    // }
+  }
+  @keyframes moveForwards-#{$i} {
+    to {
+      scale: 1;
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+  @keyframes dropDown-#{$i} {
+    // 0% {
+    //   --_scale: var(--_scale);
+    //   --_opacity: var(--_opacity);
+    //   --_offsetY: var(--_offsetY);
+    // }
+
+    to {
+      scale: 1.2;
+      transform: rotate3d(-1, 0, 0, 13deg);
+      translate: 0 150px;
+      opacity: 0;
+    }
+  }
+}
+
+// .card:hover{
+//      --_scale: 1.2;
+//     transform: rotate3d(-1, 0, 0, 13deg);
+//      --_offsetY: 150px;
+//      --_opacity: 0;
+// }
