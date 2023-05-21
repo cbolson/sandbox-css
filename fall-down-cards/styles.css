@@ -49,12 +49,18 @@ body {
 }
 
 .card:nth-child(1) {
-  --_scale: calc(1 - calc(0 * 0.1));
-  --_opacity: calc(1 - 0 * 0.3);
-  --_offsetY: calc(-1 * calc(calc(0 + 0) * 50px));
-  z-index: calc(1 - 0);
-  --_delayDrop: calc(1 * 2000ms);
-  --_delayMove: calc(0 * 2000ms);
+  --_scale: 1;
+  --_opacity: 1;
+  --_offsetY: 0px;
+  --_delayDrop: 2000ms;
+  --_delayMove: 0ms;
+  z-index: 1;
+  /*
+  first card only needs to drop down
+  second card needs to move forward at same time as previous drop-down then drop down
+  third card needs to move forward 50% as first card drops down, then further 50% after previous
+  LAST card does not need to drop down
+  */
   animation-name: moveForwards-1, dropDown-1;
   animation-duration: 300ms;
   animation-delay: var(--_delayMove), var(--_delayDrop);
@@ -78,12 +84,18 @@ body {
   }
 }
 .card:nth-child(2) {
-  --_scale: calc(1 - calc(1 * 0.1));
-  --_opacity: calc(1 - 1 * 0.3);
-  --_offsetY: calc(-1 * calc(calc(0 + 1) * 50px));
-  z-index: calc(1 - 1);
-  --_delayDrop: calc(2 * 2000ms);
-  --_delayMove: calc(1 * 2000ms);
+  --_scale: 0.9;
+  --_opacity: 0.7;
+  --_offsetY: -50px;
+  --_delayDrop: 4000ms;
+  --_delayMove: 2000ms;
+  z-index: 0;
+  /*
+  first card only needs to drop down
+  second card needs to move forward at same time as previous drop-down then drop down
+  third card needs to move forward 50% as first card drops down, then further 50% after previous
+  LAST card does not need to drop down
+  */
   animation-name: moveForwards-2, dropDown-2;
   animation-duration: 300ms;
   animation-delay: var(--_delayMove), var(--_delayDrop);
@@ -107,12 +119,18 @@ body {
   }
 }
 .card:nth-child(3) {
-  --_scale: calc(1 - calc(2 * 0.1));
-  --_opacity: calc(1 - 2 * 0.3);
-  --_offsetY: calc(-1 * calc(calc(0 + 2) * 50px));
-  z-index: calc(1 - 2);
-  --_delayDrop: calc(3 * 2000ms);
-  --_delayMove: calc(2 * 2000ms);
+  --_scale: 0.8;
+  --_opacity: 0.4;
+  --_offsetY: -100px;
+  --_delayDrop: 6000ms;
+  --_delayMove: 4000ms;
+  z-index: -1;
+  /*
+  first card only needs to drop down
+  second card needs to move forward at same time as previous drop-down then drop down
+  third card needs to move forward 50% as first card drops down, then further 50% after previous
+  LAST card does not need to drop down
+  */
   animation-name: moveForwards-3, dropDown-3;
   animation-duration: 300ms;
   animation-delay: var(--_delayMove), var(--_delayDrop);

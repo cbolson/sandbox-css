@@ -55,17 +55,31 @@ $stepOffset: 50;
 $stepDelay: 2000;
 $stepDelayMove: 1000;
 @for $i from 1 through $cards {
+  $val: ($i - 1);
+  $scale: (1 - $val * $stepScale);
+  $opacity: (1 - $val * $stepOpacity);
+  $offsetY: (-1 * $val * $stepOffset + px);
+  $zindex: (1 - $val);
+  $delayDrop: ($i * $stepDelay + ms);
+
+  $delayMove: ($val * $stepDelay + ms);
+
   .card:nth-child(#{$i}) {
-    $val: ($i - 1);
+    --_scale: #{$scale};
+    --_opacity: #{$opacity};
+    --_offsetY: #{$offsetY};
+    --_delayDrop: #{$delayDrop};
+    --_delayMove: #{$delayMove};
 
-    --_scale: calc(1 - calc(#{$val} * #{$stepScale}));
-    --_opacity: calc(1 - #{$val} * #{$stepOpacity});
-    --_offsetY: calc(-1 * calc(calc(0 + #{$val}) * #{$stepOffset}px));
-    z-index: calc(1 - #{$val});
-    --_delayDrop: calc(#{$i} * #{$stepDelay}ms);
+    // move back in stack
+    z-index: #{$zindex};
 
-    --_delayMove: calc(#{$val} * #{$stepDelay}ms);
-
+    /*
+   first card only needs to drop down
+   second card needs to move forward at same time as previous drop-down then drop down
+   third card needs to move forward 50% as first card drops down, then further 50% after previous
+   LAST card does not need to drop down
+   */
     // @if ($i != $cards) {
     animation-name: moveForwards-#{$i}, dropDown-#{$i};
     animation-duration: 300ms;
