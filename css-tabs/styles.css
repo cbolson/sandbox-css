@@ -1,0 +1,126 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+:root {
+  --body-bg: hsl(0, 0%, 10%);
+  --body-clr: hsl(255 100% 100%);
+}
+body {
+  background-color: var(--body-bg);
+  color: var(--body-clr);
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5rem;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.wrapper {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+nav {
+  position: relative;
+  height: 50px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+nav::after {
+  content: "";
+  background: silver;
+  width: 100%;
+  height: 1px;
+  bottom: 2px;
+  position: absolute;
+  filter: blur(0.5px);
+}
+nav label {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  transition: all 300ms ease-in;
+}
+#home:checked ~ nav label.home,
+#blog:checked ~ nav label.blog,
+#code:checked ~ nav label.code,
+#help:checked ~ nav label.help,
+#about:checked ~ nav label.about {
+  color: purple;
+}
+input[type="radio"] {
+  display: none;
+}
+.slider {
+  position: absolute;
+  height: 4.5px;
+  background-color: purple;
+  border-radius: 20px;
+  width: 20%;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  transition: left 300ms ease-in-out;
+  filter: blur(0.4px);
+}
+#blog:checked ~ nav .slider {
+  left: 20%;
+}
+#code:checked ~ nav .slider {
+  left: 40%;
+}
+#help:checked ~ nav .slider {
+  left: 60%;
+}
+#about:checked ~ nav .slider {
+  left: 80%;
+}
+
+section {
+  filter: blur(0.3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content {
+  display: none;
+  color: #111;
+  padding: 2rem;
+}
+.content .title {
+  font-weight: 600;
+}
+
+#home:checked ~ section .content-1 {
+  display: block;
+}
+#blog:checked ~ section .content-2 {
+  display: block;
+}
+#code:checked ~ section .content-3 {
+  display: block;
+}
+#help:checked ~ section .content-4 {
+  display: block;
+}
+#about:checked ~ section .content-5 {
+  display: block;
+}
