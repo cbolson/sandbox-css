@@ -6,6 +6,7 @@
 :root {
   --body-bg: hsl(0, 0%, 10%);
   --body-clr: hsl(255 100% 100%);
+  --nav-clr-active: purple;
 }
 body {
   background-color: var(--body-bg);
@@ -20,36 +21,40 @@ body {
   place-items: center;
 }
 
-.wrapper {
+.tabbed {
+  --_nav-items: 4;
+  --_nav-item-w: calc(100% / var(--_nav-items));
+
   max-width: 600px;
   width: 100%;
   background-color: #fff;
   border-radius: 10px;
   display: flex;
-  align-items: center;
+
   justify-content: center;
   flex-direction: column;
   padding: 2rem;
+  overflow: hidden;
 }
-nav {
+.tabbed__nav {
   position: relative;
   height: 50px;
   width: 80%;
+  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000;
 }
-nav::after {
+.tabbed__nav::after {
   content: "";
-  background: silver;
+  background: #00000020;
   width: 100%;
   height: 1px;
-  bottom: 2px;
+  bottom: 1px;
   position: absolute;
-  filter: blur(0.5px);
 }
-nav label {
+.tabbed__nav label {
   position: relative;
   display: block;
   height: 100%;
@@ -59,68 +64,67 @@ nav label {
   cursor: pointer;
   transition: all 300ms ease-in;
 }
-#home:checked ~ nav label.home,
-#blog:checked ~ nav label.blog,
-#code:checked ~ nav label.code,
-#help:checked ~ nav label.help,
-#about:checked ~ nav label.about {
-  color: purple;
+.tab-radio:nth-child(1):checked ~ .tabbed__nav label:nth-child(1),
+.tab-radio:nth-child(2):checked ~ .tabbed__nav label:nth-child(2),
+.tab-radio:nth-child(3):checked ~ .tabbed__nav label:nth-child(3),
+.tab-radio:nth-child(4):checked ~ .tabbed__nav label:nth-child(4) {
+  color: var(--nav-clr-active);
 }
 input[type="radio"] {
-  display: none;
+  /* hide radio buttons but keep them accessible and allow the user to arrow navigate */
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
 }
-.slider {
+.tabbed__slider {
   position: absolute;
-  height: 4.5px;
-  background-color: purple;
+  height: 3px;
+  background-color: var(--nav-clr-active);
   border-radius: 20px;
-  width: 20%;
+  width: var(--_nav-item-w);
   z-index: 1;
   left: 0;
   bottom: 0;
   transition: left 300ms ease-in-out;
-  filter: blur(0.4px);
 }
-#blog:checked ~ nav .slider {
-  left: 20%;
+/* position slider */
+.tab-radio:nth-child(1):checked ~ .tabbed__nav .tabbed__slider {
+  left: calc(var(--_nav-item-w) * 0);
 }
-#code:checked ~ nav .slider {
-  left: 40%;
+.tab-radio:nth-child(2):checked ~ .tabbed__nav .tabbed__slider {
+  left: calc(var(--_nav-item-w) * 1);
 }
-#help:checked ~ nav .slider {
-  left: 60%;
+.tab-radio:nth-child(3):checked ~ .tabbed__nav .tabbed__slider {
+  left: calc(var(--_nav-item-w) * 2);
 }
-#about:checked ~ nav .slider {
-  left: 80%;
+.tab-radio:nth-child(4):checked ~ .tabbed__nav .tabbed__slider {
+  left: calc(var(--_nav-item-w) * 3);
 }
 
-section {
+.tabbed__contents {
   filter: blur(0.3px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(var(--_nav-items), 1fr);
+  width: calc(100% * var(--_nav-items));
+  transition: translate 500ms ease-in-out;
 }
-.content {
-  display: none;
+.tabbed__contents .content {
   color: #111;
   padding: 2rem;
 }
-.content .title {
+.tabbed__contents .content .title {
   font-weight: 600;
 }
 
-#home:checked ~ section .content-1 {
-  display: block;
+.tab-radio:nth-child(1):checked ~ .tabbed__contents {
+  translate: 0 0;
 }
-#blog:checked ~ section .content-2 {
-  display: block;
+.tab-radio:nth-child(2):checked ~ .tabbed__contents {
+  translate: calc(var(--_nav-item-w) * -1) 0;
 }
-#code:checked ~ section .content-3 {
-  display: block;
+.tab-radio:nth-child(3):checked ~ .tabbed__contents {
+  translate: calc(var(--_nav-item-w) * -2) 0;
 }
-#help:checked ~ section .content-4 {
-  display: block;
-}
-#about:checked ~ section .content-5 {
-  display: block;
+.tab-radio:nth-child(4):checked ~ .tabbed__contents {
+  translate: calc(var(--_nav-item-w) * -3) 0;
 }
