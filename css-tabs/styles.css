@@ -4,12 +4,12 @@
   box-sizing: border-box;
 }
 :root {
-  --body-bg: hsl(0, 0%, 10%);
-  --body-clr: hsl(255 100% 100%);
-  --nav-clr-active: purple;
+  --body-clr: #000;
+  --nav-clr-hover: #00bf72;
+  --nav-clr-active: #004d7a;
 }
 body {
-  background-color: var(--body-bg);
+   background-image: linear-gradient(to right bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
   color: var(--body-clr);
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -64,6 +64,10 @@ body {
   cursor: pointer;
   transition: all 300ms ease-in;
 }
+.tabbed__nav label:hover{
+    color: var(--nav-clr-hover);
+}
+
 .tab-radio:nth-child(1):checked ~ .tabbed__nav label:nth-child(1),
 .tab-radio:nth-child(2):checked ~ .tabbed__nav label:nth-child(2),
 .tab-radio:nth-child(3):checked ~ .tabbed__nav label:nth-child(3),
