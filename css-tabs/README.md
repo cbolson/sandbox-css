@@ -9,4 +9,4 @@ CSS only tabs with arrow navigation
 - Tabbed content.
 - 100% CSS animation.
 
-[Codepen Demo](https://codepen.io/cbolson/pen/abQwPxOL)
+[Codepen Demo](https://codepen.io/cbolson/pen/abQwPxO)
