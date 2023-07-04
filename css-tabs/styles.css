@@ -4,12 +4,20 @@
   box-sizing: border-box;
 }
 :root {
+    --body-bg: linear-gradient(
+    to right bottom,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
   --body-clr: #000;
   --nav-clr-hover: #00bf72;
   --nav-clr-active: #004d7a;
 }
 body {
-   background-image: linear-gradient(to right bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+  background: var(--body-bg);
   color: var(--body-clr);
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -64,8 +72,8 @@ body {
   cursor: pointer;
   transition: all 300ms ease-in;
 }
-.tabbed__nav label:hover{
-    color: var(--nav-clr-hover);
+.tabbed__nav label:hover {
+  color: var(--nav-clr-hover);
 }
 
 .tab-radio:nth-child(1):checked ~ .tabbed__nav label:nth-child(1),
@@ -119,7 +127,21 @@ input[type="radio"] {
 .tabbed__contents .content .title {
   font-weight: 600;
 }
-
+.tabbed__contents .content img {
+  float: left;
+  margin-right: 1rem;
+}
+.btn{
+    border: none;
+    background: #a8eb12;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn:hover{
+    background: #00bf72;
+    color: #FFF;
+}
 .tab-radio:nth-child(1):checked ~ .tabbed__contents {
   translate: 0 0;
 }
